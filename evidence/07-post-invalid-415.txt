@@ -1,0 +1,12 @@
+HTTP/1.1 415 UNSUPPORTED MEDIA TYPE
+Server: Werkzeug/3.1.8 Python/3.13.7
+Date: Sun, 20 Sep 2026 11:37:33 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 215
+Connection: close
+
+<!doctype html>
+<html lang=en>
+<title>415 Unsupported Media Type</title>
+<h1>Unsupported Media Type</h1>
+<p>Did not attempt to load JSON data because the request Content-Type was not &#39;application/json&#39;.</p>
