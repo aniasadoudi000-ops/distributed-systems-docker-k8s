@@ -1,0 +1,3 @@
+IMAGE                                  ID             DISK USAGE   CONTENT SIZE   EXTRA
+aniasadoudi/msc-de1-flask-app:1.0.0    8d02c87e0aaa        212MB         45.5MB   U    
+aniasadoudi/msc-de1-flask-app:latest   8d02c87e0aaa        212MB         45.5MB   U    

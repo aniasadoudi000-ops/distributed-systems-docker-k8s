@@ -1,0 +1,130 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 854B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13-slim
+#2 ...
+
+#3 [auth] library/python:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13-slim
+#2 DONE 4.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 219B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 7.03kB done
+#5 DONE 0.0s
+
+#6 [1/6] FROM docker.io/library/python:3.13-slim@sha256:8d9d0b8bcf6506481eae4907c18f5e3e7902e629f5f6d684f9e7c32e85e3ddf0
+#6 resolve docker.io/library/python:3.13-slim@sha256:8d9d0b8bcf6506481eae4907c18f5e3e7902e629f5f6d684f9e7c32e85e3ddf0 0.0s done
+#6 sha256:0fb3db4aef9a2b829578ae91e7581b1a69b5a6426b228fed51743b89268c1f33 249B / 249B 0.1s done
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 0B / 11.83MB 0.3s
+#6 sha256:123abebbace7b00617ae9e3b7716ad69400ff74e6cddda434d70254d9772a826 0B / 1.28MB 0.2s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 0B / 30.19MB 0.2s
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 1.05MB / 11.83MB 0.6s
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 2.10MB / 11.83MB 0.8s
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 3.15MB / 11.83MB 1.2s
+#6 sha256:123abebbace7b00617ae9e3b7716ad69400ff74e6cddda434d70254d9772a826 1.28MB / 1.28MB 1.3s done
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 4.19MB / 11.83MB 1.5s
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 5.24MB / 11.83MB 1.8s
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 6.29MB / 11.83MB 2.1s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 2.10MB / 30.19MB 2.1s
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 7.34MB / 11.83MB 2.4s
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 8.39MB / 11.83MB 2.7s
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 9.44MB / 11.83MB 2.9s
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 10.49MB / 11.83MB 3.2s
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 11.53MB / 11.83MB 3.3s
+#6 sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 11.83MB / 11.83MB 3.3s done
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 4.19MB / 30.19MB 3.5s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 6.29MB / 30.19MB 4.5s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 8.39MB / 30.19MB 5.3s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 10.49MB / 30.19MB 5.6s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 12.58MB / 30.19MB 6.0s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 14.68MB / 30.19MB 6.3s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 16.78MB / 30.19MB 6.6s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 18.87MB / 30.19MB 7.1s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 20.97MB / 30.19MB 7.7s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 23.07MB / 30.19MB 8.0s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 25.17MB / 30.19MB 8.4s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 27.26MB / 30.19MB 8.7s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 29.36MB / 30.19MB 9.0s
+#6 sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 30.19MB / 30.19MB 9.1s done
+#6 extracting sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b
+#6 extracting sha256:bd36565c0fdebaf0f3af5c3b4ce610ca085ced32e9e9da850d95912f5f18f47b 0.4s done
+#6 DONE 9.5s
+
+#6 [1/6] FROM docker.io/library/python:3.13-slim@sha256:8d9d0b8bcf6506481eae4907c18f5e3e7902e629f5f6d684f9e7c32e85e3ddf0
+#6 extracting sha256:123abebbace7b00617ae9e3b7716ad69400ff74e6cddda434d70254d9772a826 0.0s done
+#6 extracting sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62
+#6 extracting sha256:4b83fbae47ddba3c3f918e9d9dc484673954455ccfec337afd1691df0faa9d62 0.2s done
+#6 DONE 9.7s
+
+#6 [1/6] FROM docker.io/library/python:3.13-slim@sha256:8d9d0b8bcf6506481eae4907c18f5e3e7902e629f5f6d684f9e7c32e85e3ddf0
+#6 extracting sha256:0fb3db4aef9a2b829578ae91e7581b1a69b5a6426b228fed51743b89268c1f33 done
+#6 DONE 9.7s
+
+#7 [2/6] WORKDIR /app
+#7 DONE 0.2s
+
+#8 [3/6] RUN groupadd --system --gid 10001 app  && useradd --system --uid 10001 --gid app --no-create-home --shell /usr/sbin/nologin app
+#8 0.211 useradd warning: app's uid 10001 is greater than SYS_UID_MAX 999
+#8 DONE 0.2s
+
+#9 [4/6] COPY requirements.txt .
+#9 DONE 0.0s
+
+#10 [5/6] RUN pip install -r requirements.txt
+#10 0.858 Collecting flask==2.3.3 (from -r requirements.txt (line 1))
+#10 0.975   Downloading flask-2.3.3-py3-none-any.whl.metadata (3.6 kB)
+#10 1.017 Collecting gunicorn==23.0.0 (from -r requirements.txt (line 2))
+#10 1.049   Downloading gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)
+#10 1.100 Collecting Werkzeug>=2.3.7 (from flask==2.3.3->-r requirements.txt (line 1))
+#10 1.122   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#10 1.156 Collecting Jinja2>=3.1.2 (from flask==2.3.3->-r requirements.txt (line 1))
+#10 1.184   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#10 1.213 Collecting itsdangerous>=2.1.2 (from flask==2.3.3->-r requirements.txt (line 1))
+#10 1.246   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#10 1.289 Collecting click>=8.1.3 (from flask==2.3.3->-r requirements.txt (line 1))
+#10 1.337   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#10 1.371 Collecting blinker>=1.6.2 (from flask==2.3.3->-r requirements.txt (line 1))
+#10 1.411   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#10 1.456 Collecting packaging (from gunicorn==23.0.0->-r requirements.txt (line 2))
+#10 1.490   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+#10 1.588 Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->flask==2.3.3->-r requirements.txt (line 1))
+#10 1.613   Downloading markupsafe-3.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.7 kB)
+#10 1.645 Downloading flask-2.3.3-py3-none-any.whl (96 kB)
+#10 1.721 Downloading gunicorn-23.0.0-py3-none-any.whl (85 kB)
+#10 1.759 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#10 1.791 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#10 1.830 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#10 1.864 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#10 1.926 Downloading markupsafe-3.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (24 kB)
+#10 1.950 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#10 2.022 Downloading packaging-26.3-py3-none-any.whl (129 kB)
+#10 2.115 Installing collected packages: packaging, MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, gunicorn, flask
+#10 2.387 
+#10 2.388 Successfully installed Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.1.8 blinker-1.9.0 click-8.5.0 flask-2.3.3 gunicorn-23.0.0 itsdangerous-2.2.0 packaging-26.3
+#10 2.388 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#10 DONE 2.4s
+
+#11 [6/6] COPY --chown=10001:10001 app/ ./app/
+#11 DONE 0.0s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 0.2s done
+#12 exporting manifest sha256:777de81d2dad303de4efd6ea43d2bdb7ce24c3482c865902eb7f10f250955988 done
+#12 exporting config sha256:5d4308c5194105637666bb29b36610b2a5ccab10c98ec75c4eef83157cf6c30d done
+#12 exporting attestation manifest sha256:90504a5b843db89801d1475e8b3dd599dd512eb56d1936aea59ff409af41a50e done
+#12 exporting manifest list sha256:8d02c87e0aaa2dfedc2335c38a32da19ee4d75c053b1a50a1f0b32b28f16cb6c done
+#12 naming to docker.io/aniasadoudi/msc-de1-flask-app:1.0.0 done
+#12 unpacking to docker.io/aniasadoudi/msc-de1-flask-app:1.0.0 0.1s done
+#12 naming to docker.io/aniasadoudi/msc-de1-flask-app:latest done
+#12 unpacking to docker.io/aniasadoudi/msc-de1-flask-app:latest done
+#12 DONE 0.3s
