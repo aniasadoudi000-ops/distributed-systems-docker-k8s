@@ -1,0 +1,4 @@
+NAME                         READY   STATUS              RESTARTS   AGE
+flask-app-768645dd5d-btrnp   1/1     Running             0          76s
+flask-app-768645dd5d-vfq5f   1/1     Running             0          5m53s
+flask-app-768645dd5d-vzgp8   0/1     ContainerCreating   0          0s
