@@ -1,0 +1,5 @@
+NAME                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/flask-app   ClusterIP   10.96.43.220   <none>        80/TCP    75s
+
+NAME                  ENDPOINTS                         AGE
+endpoints/flask-app   10.244.1.2:5000,10.244.2.2:5000   75s
