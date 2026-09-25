@@ -1,0 +1,12 @@
+HTTP/1.1 404 NOT FOUND
+Server: gunicorn
+Date: Fri, 25 Sep 2026 15:47:59 GMT
+Connection: keep-alive
+Content-Type: text/html; charset=utf-8
+Content-Length: 207
+
+<!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>

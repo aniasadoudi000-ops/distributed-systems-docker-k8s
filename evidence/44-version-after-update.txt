@@ -1,0 +1,8 @@
+HTTP/1.1 200 OK
+Server: gunicorn
+Date: Fri, 25 Sep 2026 15:44:49 GMT
+Connection: keep-alive
+Content-Type: application/json
+Content-Length: 20
+
+{"version":"1.1.0"}
