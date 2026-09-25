@@ -1,0 +1,4 @@
+NAME                    STATUS   ROLES           AGE   VERSION
+msc-de1-control-plane   Ready    control-plane   35s   v1.37.0
+msc-de1-worker          Ready    <none>          21s   v1.37.0
+msc-de1-worker2         Ready    <none>          21s   v1.37.0
