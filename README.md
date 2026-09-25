@@ -1,91 +1,142 @@
-# Flask Sample App with Tests
+# msc-de1-distributed-systems-docker-k8s
 
-This is a simple Flask web application with unit tests. The application provides a basic REST API for managing a list of items. It serves as a starting point for learning how to create a Flask application and write tests for it.
+Containerisation, sécurisation, publication et orchestration locale d'une application Flask existante, dans le cadre du module *Distributed Systems* (MSc DE1).
 
-## Project Structure
+## 1. Objectif et architecture
 
-The project is organized as follows:
+Ce projet prend l'application starter [UBC Flask Sample App](https://github.com/ubc/flask-sample-app) — une API REST minimale en Flask, sans Docker — et construit autour :
 
-- `app/`: Contains the Flask application and routes.
-- `tests/`: Houses unit tests for the application.
-- `run.py`: A script to run the Flask application.
+- une image Docker de production (utilisateur non-root, filesystem en lecture seule, health check) ;
+- un fichier Docker Compose pour l'exécution locale durcie ;
+- un scan de vulnérabilités (Trivy) et un SBOM (Syft) ;
+- une publication sur Docker Hub ;
+- un cluster Kubernetes local (kind, 1 control-plane + 2 workers) exécutant 2 replicas de l'application, avec probes, limites de ressources, NetworkPolicy et contexte de sécurité.
 
-## Getting Started
+**Architecture** : `Client → kubectl port-forward → Service (ClusterIP) → 2 pods Flask/gunicorn (répartis sur 2 workers)`.
 
-To get the Flask app up and running on your local machine, follow these steps:
+Lien vers l'application d'origine : https://github.com/ubc/flask-sample-app
 
-1. **Clone the Repository:**
+## 2. Prérequis
 
-   ```bash
-   git clone <repository_url>
-   cd flask_sample_app
-   ```
+- Python 3.13 (le projet a été développé et testé avec cette version)
+- Docker Desktop
+- kind
+- kubectl
+- (optionnel) Trivy et Syft pour reproduire le scan de sécurité
 
-2. **Set Up a Virtual Environment:**
+## 3. Exécuter l'application d'origine en local (sans Docker)
 
-   It's recommended to create a virtual environment to isolate project dependencies.
+```bash
+git clone https://github.com/aniasadoudi000-ops/distributed-systems-docker-k8s.git
+cd distributed-systems-docker-k8s
+python3 -m venv venv
+source venv/bin/activate      # Windows : venv\Scripts\activate
+pip install -r requirements.txt
+python run.py
+```
 
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows, use venv\Scripts\activate
-   ```
+L'application écoute alors sur `http://127.0.0.1:5000` (uniquement en local, voir la section Sécurité et limites connues).
 
-3. **Install Dependencies:**
+Tester les routes :
+```bash
+curl -i http://localhost:5000/
+curl -i http://localhost:5000/items
+curl -i -X POST http://localhost:5000/items -H "Content-Type: application/json" -d '{"name":"test"}'
+curl -i http://localhost:5000/items/0
+```
 
-   Install the necessary dependencies using `pip`:
+Lancer les tests unitaires :
+```bash
+python -m unittest discover tests
+```
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+Les preuves de cette étape (sorties de commandes) sont dans `evidence/00-*` à `evidence/09-*`.
 
-4. **Run the Application:**
+## 4. Construire et exécuter l'image Docker
 
-   Start the Flask application:
+```bash
+docker build -t aniasadoudi/msc-de1-flask-app:1.0.0 -t aniasadoudi/msc-de1-flask-app:latest .
+docker run -d --name flask-app -p 5000:5000 aniasadoudi/msc-de1-flask-app:1.0.0
+curl -i http://localhost:5000/
+docker logs flask-app
+docker exec flask-app id          # confirme l'exécution non-root (uid=10001)
+docker ps                         # confirme le statut "healthy"
+docker stop flask-app && docker rm flask-app
+```
 
-   ```bash
-   python run.py
-   ```
+## 5. Exécuter avec Docker Compose
 
-   The app will be available at [http://localhost:5000](http://localhost:5000).
+```bash
+docker compose up -d --build
+docker compose ps
+curl -i http://localhost:5000/
+docker compose down
+```
 
-5. **Run Tests:**
+## 6. Docker Hub
 
-   To run the unit tests, execute the following command:
+Image publique : **https://hub.docker.com/r/aniasadoudi/msc-de1-flask-app**
 
-   ```bash
-   python -m unittest discover tests
-   ```
+Tags publiés : `1.0.0`, `1.1.0` (version de démonstration pour le rolling update), `latest`.
 
-   This command will discover and run all tests in the `tests` directory.
+L'image déployée sur Kubernetes est `aniasadoudi/msc-de1-flask-app:1.0.0`.
 
-## Application Routes
+Vérification après publication :
+```bash
+docker pull aniasadoudi/msc-de1-flask-app:1.0.0
+docker run --rm -p 5000:5000 aniasadoudi/msc-de1-flask-app:1.0.0
+curl -i http://localhost:5000/
+```
 
-The application provides the following routes:
+## 7. Créer le cluster kind
 
-- `GET /`: Returns a simple greeting message.
-- `GET /items`: Returns a list of items.
-- `GET /items/{item_id}`: Returns the details of a specific item.
-- `POST /items`: Adds a new item to the list.
+```bash
+kind create cluster --config kind/kind-config.yaml
+kubectl config current-context   # doit afficher kind-msc-de1
+kubectl get nodes                # 1 control-plane + 2 workers
+```
 
-## Testing
+## 8. Déployer les manifests Kubernetes
 
-Unit tests are provided in the `tests` directory. They cover the basic functionality of the application, including route handling and response validation. You can use these tests as a reference to write your own tests or to verify the correctness of the application.
+```bash
+kubectl apply -f k8s/namespace.yaml
+kubectl apply -f k8s/
+kubectl -n msc-de1-project rollout status deploy/flask-app
+kubectl -n msc-de1-project get pods -o wide
+```
 
-## License
+## 9. Accéder à l'application et la tester
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```bash
+kubectl -n msc-de1-project port-forward svc/flask-app 8080:80
+```
+Dans un autre terminal :
+```bash
+curl -i http://localhost:8080/
+curl -i http://localhost:8080/items
+```
 
-## Contribute
+**Note** : le port-forward est attaché à un pod précis, pas au Service. Il se coupe automatiquement quand ce pod est remplacé (rollout, rollback, suppression manuelle) et doit être relancé.
 
-Feel free to contribute to this project by opening issues or submitting pull requests. We welcome any improvements, bug fixes, or additional features.
+## 10. Supprimer le cluster local
 
-## Author
+```bash
+kind delete cluster --name msc-de1
+```
 
-- Pan Luo
+## 11. Décisions de sécurité et limites connues
 
-## Acknowledgments
+**Décisions appliquées** (cohérentes entre Docker, Compose et Kubernetes) :
+- exécution en utilisateur non-root (uid/gid 10001) dans l'image, Compose et Kubernetes ;
+- filesystem racine en lecture seule (`read_only` / `readOnlyRootFilesystem`), avec `/tmp` monté en `tmpfs`/`emptyDir` pour les besoins de gunicorn ;
+- `no-new-privileges` (Compose) et `allowPrivilegeEscalation: false` (Kubernetes) ;
+- toutes les capabilities Linux supprimées (`cap_drop: ALL` / `capabilities.drop: [ALL]`) ;
+- limites CPU/mémoire définies à tous les niveaux ;
+- `seccompProfile: RuntimeDefault` dans Kubernetes ;
+- aucun secret dans l'image, le Dockerfile ou les fichiers commités ;
+- `NetworkPolicy` restreignant l'ingress vers les pods de l'application au namespace `msc-de1-project`.
 
-- This project was created as a sample Flask application for educational purposes.
-- Special thanks to the Flask community for providing a fantastic web framework.
-
-Enjoy experimenting with the Flask sample app! If you have any questions or need further assistance, please don't hesitate to reach out.
+**Limites connues** :
+- **État en mémoire** : l'application starter stocke les items dans une liste Python en mémoire (`items = []`), sans base de données. Avec 2 replicas, chaque pod a son propre état : un `POST /items` sur un pod n'est pas visible depuis l'autre. Ce comportement n'a pas été modifié pour respecter la consigne de ne pas redessiner l'application. **Amélioration recommandée pour la production** : externaliser l'état dans une base de données partagée (PostgreSQL, Redis).
+- **NetworkPolicy et kind** : le CNI par défaut de kind (kindnet) n'applique pas nécessairement les `NetworkPolicy`. Le manifeste est fourni et documente l'intention d'isolation réseau ; son application effective nécessiterait un CNI compatible tel que Calico ou Cilium.
+- **Scan de vulnérabilités** : voir `security/vulnerability-scan.txt` — 0 CRITICAL, 44 HIGH restants (majoritairement des paquets système Debian sans correctif amont disponible à ce jour ; deux paquets Python hérités de l'image de base, non utilisés directement par l'application). Détail dans le rapport PDF, section 3.
